@@ -1,0 +1,40 @@
+$(document).ready(function(){
+  $('#button').click(function(){
+  var name=$('#valueofname');
+  var email=$('#valueofemail');
+  if(name=="" or email=""){
+    $('.msg').html("please fillout the form!");
+  }else{
+    $.ajax("type":POST,"url":"demo.php",data:{  name:name,email:email},success:function(fulldata){
+      $('.msg').html(fulldata);
+    })
+  }
+  })
+})
+
+
+
+post example:-
+   $(document).ready(function(){
+          $('#button').click(function(){
+            var name=$('#valueofname').val();
+            // alert(name);
+            $.post("demo.php",{'val':name},function(data){
+              $('.msg').html(data);
+            })
+          });
+        })
+
+
+
+get example:-
+  $(document).ready(function(){
+          $('#button').click(function(){
+            var name=$('#valueofname').val();
+            // alert(name);
+            $.get("demo.php",{'val':name},function(data){
+              $('.msg').html(data);
+            })
+          });
+        })
+
