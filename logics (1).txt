@@ -15,26 +15,58 @@ $(document).ready(function(){
 
 
 post example:-
-   $(document).ready(function(){
-          $('#button').click(function(){
-            var name=$('#valueofname').val();
-            // alert(name);
-            $.post("demo.php",{'val':name},function(data){
-              $('.msg').html(data);
-            })
-          });
-        })
+$(document).ready(function(){
+    $('#button').click(function(){
+        var store=$('#name').val();
+        
+        $.post('demo.php',{vall:store},function(data){
+            $('#msg').html(data);
 
+        })
+    
+    });
+});
+and the file of php is:-
+<?php
+if(isset($_POST['vall'])){
+    echo $_POST['vall'];
+}
+
+?>
 
 
 get example:-
-  $(document).ready(function(){
-          $('#button').click(function(){
-            var name=$('#valueofname').val();
-            // alert(name);
-            $.get("demo.php",{'val':name},function(data){
-              $('.msg').html(data);
-            })
-          });
-        })
+$(document).ready(function(){
+    $('#button').click(function(){
+        var store=$('#name').val();
+        
+        $.get('demo.php',{vall:store},function(data){
+            $('#msg').html(data);
 
+        })
+    
+    });
+});
+
+
+
+
+ajax example:-
+
+    $(document).ready(function(){
+    $('#button').click(function(){
+        var store=$('#name').val();
+        
+        
+        $.ajax({
+            type: "POST",
+            url: "demotwo.php",
+            data: {vall:store},
+            
+            success: function (datafull) {
+            alert(datafull);
+            }
+        });
+    
+    });
+});
