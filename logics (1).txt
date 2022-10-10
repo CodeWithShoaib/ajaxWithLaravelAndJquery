@@ -1,72 +1,28 @@
-$(document).ready(function(){
-  $('#button').click(function(){
-  var name=$('#valueofname');
-  var email=$('#valueofemail');
-  if(name=="" or email=""){
-    $('.msg').html("please fillout the form!");
-  }else{
-    $.ajax("type":POST,"url":"demo.php",data:{  name:name,email:email},success:function(fulldata){
-      $('.msg').html(fulldata);
-    })
-  }
-  })
-})
 
 
 
-post example:-
-$(document).ready(function(){
-    $('#button').click(function(){
-        var store=$('#name').val();
-        
-        $.post('demo.php',{vall:store},function(data){
-            $('#msg').html(data);
+         jQuery(document).ready(function(){
+            jQuery('#submit').click(function(e){
+               e.preventDefault();
+               $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+               jQuery.ajax({
+                  url: "data/post",
+                  method: 'POST',
+                  data: {
+                     name: jQuery('#name').val(),
+                     fname: jQuery('#fname').val(),
+                      _token: '{{csrf_token()}}'
 
-        })
-    
-    });
-});
-and the file of php is:-
-<?php
-if(isset($_POST['vall'])){
-    echo $_POST['vall'];
-}
-
-?>
-
-
-get example:-
-$(document).ready(function(){
-    $('#button').click(function(){
-        var store=$('#name').val();
-        
-        $.get('demo.php',{vall:store},function(data){
-            $('#msg').html(data);
-
-        })
-    
-    });
-});
+                  },
+                  success: function(result){
+                     console.log(result);
+                  }});
+               });
+            });
 
 
 
-
-ajax example:-
-
-    $(document).ready(function(){
-    $('#button').click(function(){
-        var store=$('#name').val();
-        
-        
-        $.ajax({
-            type: "POST",
-            url: "demotwo.php",
-            data: {vall:store},
-            
-            success: function (datafull) {
-            alert(datafull);
-            }
-        });
-    
-    });
-});
